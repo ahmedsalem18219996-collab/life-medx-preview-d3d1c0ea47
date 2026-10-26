@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          base="https://ahmedsalem18219996-collab.github.io/life-medx-preview/"
+          base="https://ahmedsalem18219996-collab.github.io/life-medx-preview-d3d1c0ea47/"
           success=0
           for i in $(seq 1 18); do
             status=$(curl -L -sS --max-time 15 -D headers.txt -o preview.html -w '%{http_code}' "$base" || true)
