@@ -44,3 +44,15 @@ jobs:
             [ "$status" = 200 ] || { echo "Missing $path: $status"; exit 1; }
           done
           echo "PASS: public URL serves HTML plus static assets with HTTP 200"
+
+      - name: Verify old preview URL is inactive
+        shell: bash
+        run: |
+          set -euo pipefail
+          old="https://ahmedsalem18219996-collab.github.io/life-medx-preview/"
+          status=$(curl -L -sS --max-time 15 -o /dev/null -w '%{http_code}' "$old")
+          if [ "$status" = "200" ]; then
+            echo "FAIL: old preview URL is still accessible"
+            exit 1
+          fi
+          echo "PASS: old preview URL returns HTTP $status"
